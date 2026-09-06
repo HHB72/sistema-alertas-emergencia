@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Incidentes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>REGISTRO DE INCIDENTES</h2>
+        
+        <form id="formIncidente">
+            <div class="form-group">
+                <label for="tipo">Tipo de incidente:</label>
+                <select id="tipo" required>
+                    <option value="Médico">Emergencia médica</option>
+                    <option value="Tránsito">Accidente de tránsito</option>
+                    <option value="Seguridad">Seguridad / Violencia</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="personas">Personas afectadas:</label>
+                <input type="number" id="personas" min="1" value="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" rows="2" placeholder="Detalles breves..."></textarea>
+            </div>
+
+            <button type="submit" class="btn" style="background-color: #27ae60;">Guardar Incidente</button>
+        </form>
+
+        <h3 style="margin-top: 25px;">Historial</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tipo</th>
+                    <th>Afectados</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="tablaIncidentes"></tbody>
+        </table>
+
+        <a href="index.html" class="btn btn-back">Volver al inicio</a>
+    </div>
+
+    <script>
+        const form = document.getElementById('formIncidente');
+        const tabla = document.getElementById('tablaIncidentes');
+
+        function cargarIncidentes() {
+            tabla.innerHTML = '';
+            const incidentes = JSON.parse(localStorage.getItem('incidentes')) || [];
+            incidentes.forEach((inc, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${inc.tipo}</td>
+                    <td>${inc.personas}</td>
+                    <td>${inc.fecha}</td>
+                `;
+                tabla.appendChild(tr);
+            });
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nuevoIncidente = {
+                tipo: document.getElementById('tipo').value,
+                personas: document.getElementById('personas').value,
+                descripcion: document.getElementById('descripcion').value,
+                fecha: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+            };
+
+            const incidentes = JSON.parse(localStorage.getItem('incidentes')) || [];
+            incidentes.push(nuevoIncidente);
+            localStorage.setItem('incidentes', JSON.stringify(incidentes));
+            
+            form.reset();
+            cargarIncidentes();
+        });
+
+        cargarIncidentes();
+    </script>
+</body>
+</html>

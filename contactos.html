@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactos de Emergencia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>CONTACTOS DE EMERGENCIA</h2>
+        
+        <form id="formContacto">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" placeholder="Ej. Mamá / Juan" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" placeholder="Ej. 3511234567" required>
+            </div>
+
+            <button type="submit" class="btn" style="background-color: #27ae60;">Guardar Contacto</button>
+        </form>
+
+        <h3 style="margin-top: 25px;">Lista de contactos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                </tr>
+            </thead>
+            <tbody id="tablaContactos"></tbody>
+        </table>
+
+        <a href="index.html" class="btn btn-back">Volver al inicio</a>
+    </div>
+
+    <script>
+        const form = document.getElementById('formContacto');
+        const tabla = document.getElementById('tablaContactos');
+
+        function cargarContactos() {
+            tabla.innerHTML = '';
+            const contactos = JSON.parse(localStorage.getItem('contactos')) || [];
+            contactos.forEach((c, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${c.nombre}</td>
+                    <td>${c.telefono}</td>
+                `;
+                tabla.appendChild(tr);
+            });
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nuevoContacto = {
+                nombre: document.getElementById('nombre').value,
+                telefono: document.getElementById('telefono').value
+            };
+
+            const contactos = JSON.parse(localStorage.getItem('contactos')) || [];
+            contactos.push(nuevoContacto);
+            localStorage.setItem('contactos', JSON.stringify(contactos));
+            
+            form.reset();
+            cargarContactos();
+        });
+
+        cargarContactos();
+    </script>
+</body>
+</html>

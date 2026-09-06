@@ -1,0 +1,32 @@
+[
+  {
+    "id": "rcp",
+    "titulo": "RCP (Reanimación Cardiopulmonar)",
+    "pasos": [
+      "1. Evalúa el estado de conciencia de la persona y pide ayuda inmediatamente.",
+      "2. Llama al 107 o al número local de emergencias.",
+      "3. Coloca el talón de una mano en el centro del pecho y la otra mano encima.",
+      "4. Presiona firmemente el pecho hacia abajo a un ritmo de 100 a 120 compresiones por minuto."
+    ]
+  },
+  {
+    "id": "hemorragias",
+    "titulo": "Hemorragias",
+    "pasos": [
+      "1. Cubre la herida con una gasa o paño limpio.",
+      "2. Aplica presión directa y firme sobre la herida.",
+      "3. Si el sangrado no cesa, mantén la presión sin retirar la primera gasa.",
+      "4. Eleva la extremidad si es posible y busca atención médica urgente."
+    ]
+  },
+  {
+    "id": "quemaduras",
+    "titulo": "Quemaduras",
+    "pasos": [
+      "1. Enfría la zona afectada con agua corriente fresca durante 10 a 15 minutos.",
+      "2. No apliques hielo directamente ni extiendas cremas ni aceites.",
+      "3. Cubre suavemente la herida con un paño limpio y seco.",
+      "4. Si se forman ampollas, no las revientes."
+    ]
+  }
+]

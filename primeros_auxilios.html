@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeros Auxilios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>PRIMEROS AUXILIOS</h1>
+        
+        <div class="form-group">
+            <label for="categoria">Categoría:</label>
+            <select id="categoria">
+                <option value="">-- Selecciona una categoría --</option>
+            </select>
+        </div>
+
+        <div id="pasosContainer" style="text-align: left; margin-top: 20px;">
+            <h3>Pasos a seguir:</h3>
+            <ul id="listaPasos" style="margin-left: 20px; margin-top: 10px;">
+                <li>Selecciona una categoría arriba para ver la guía.</li>
+            </ul>
+        </div>
+
+        <a href="index.html" class="btn btn-back">Volver al inicio</a>
+    </div>
+
+    <script>
+        let datosGuias = [];
+
+        fetch('primeros_auxilios.json')
+            .then(res => res.json())
+            .then(data => {
+                datosGuias = data;
+                const select = document.getElementById('categoria');
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = item.titulo;
+                    select.appendChild(option);
+                });
+            });
+
+        document.getElementById('categoria').addEventListener('change', function(e) {
+            const selectedId = e.target.value;
+            const lista = document.getElementById('listaPasos');
+            lista.innerHTML = '';
+
+            const guia = datosGuias.find(g => g.id === selectedId);
+            if (guia) {
+                guia.pasos.forEach(paso => {
+                    const li = document.createElement('li');
+                    li.textContent = paso;
+                    li.style.marginBottom = '8px';
+                    lista.appendChild(li);
+                });
+            } else {
+                lista.innerHTML = '<li>Selecciona una categoría arriba para ver la guía.</li>';
+            }
+        });
+    </script>
+</body>
+</html>

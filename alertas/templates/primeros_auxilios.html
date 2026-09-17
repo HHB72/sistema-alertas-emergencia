@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primeros Auxilios</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>PRIMEROS AUXILIOS</h1>
+        
+        <div class="form-group">
+            <label for="categoria">Categoría:</label>
+            <select id="categoria" onchange="mostrarPasos()">
+                <option value="">-- Selecciona una categoría --</option>
+                {% for guia in guias %}
+                    <option value="guia-{{ guia.id }}">{{ guia.titulo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div id="pasosContainer" style="text-align: left; margin-top: 20px;">
+            <h3>Pasos a seguir:</h3>
+            
+            <ul id="instruccionInicial" style="margin-left: 20px; margin-top: 10px;">
+                <li>Selecciona una categoría arriba para ver la guía.</li>
+            </ul>
+
+            {% for guia in guias %}
+                <div id="guia-{{ guia.id }}" class="bloque-guia" style="display: none; margin-top: 10px;">
+                    <p style="white-space: pre-line; line-height: 1.6;">{{ guia.pasos }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="{% url 'index' %}" class="btn btn-back">Volver al inicio</a>
+    </div>
+
+    <script>
+        function mostrarPasos() {
+            const select = document.getElementById('categoria');
+            const selectedVal = select.value;
+            const inicial = document.getElementById('instruccionInicial');
+
+            // Ocultar todos los bloques de guías
+            document.querySelectorAll('.bloque-guia').forEach(div => {
+                div.style.display = 'none';
+            });
+
+            if (selectedVal) {
+                inicial.style.display = 'none';
+                const guiaActiva = document.getElementById(selectedVal);
+                if (guiaActiva) {
+                    guiaActiva.style.display = 'block';
+                }
+            } else {
+                inicial.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

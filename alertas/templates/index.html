@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Emergencias</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Cabecera de autenticación -->
+        <div class="auth-bar">
+            {% if user.is_authenticated %}
+                <span class="btn-auth btn-user">👤 {{ user.username }}</span>
+                {% if user.is_staff or user.is_superuser %}
+                    <a href="{% url 'admin:index' %}" class="btn-auth btn-admin">⚙️ Admin</a>
+                {% endif %}
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-auth btn-logout">Cerrar Sesión</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-auth btn-login">Iniciar Sesión</a>
+                <a href="{% url 'registro' %}" class="btn-auth btn-user">Registrarse</a>
+            {% endif %}
+        </div>
+
+        <h1>APP DE EMERGENCIA</h1>
+
+        <div class="btn-grid">
+            <a href="{% url 'sos' %}" class="btn btn-sos">BOTÓN SOS</a>
+            <a href="{% url 'primeros_auxilios' %}" class="btn">Primeros Auxilios</a>
+            <a href="{% url 'incidentes' %}" class="btn">Registrar Incidente</a>
+            <a href="{% url 'contactos' %}" class="btn">Contactos de Emergencia</a>
+            <a href="{% url 'hospitales' %}" class="btn">Hospitales Cercanos</a>
+        </div>
+    </div>
+
+</body>
+</html>

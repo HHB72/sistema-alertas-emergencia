@@ -10,9 +10,12 @@ body {
     color: #333;
     display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     padding: 20px;
 }
 
+/* Contenedor Principal Centrado */
 .container {
     background: #ffffff;
     max-width: 480px;
@@ -23,12 +26,58 @@ body {
     text-align: center;
 }
 
+/* Barra superior interna (alineada a la derecha adentro de la tarjeta) */
+.auth-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Formato de botones tipo bloque */
+.btn-auth {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #ffffff !important;
+    border-radius: 6px;
+    text-decoration: none !important;
+    border: none;
+    cursor: pointer;
+    line-height: 1.2;
+}
+
+.btn-auth:hover {
+    opacity: 0.85;
+}
+
+.btn-admin {
+    background-color: #8e44ad;
+}
+
+.btn-user {
+    background-color: #27ae60;
+    cursor: default;
+}
+
+.btn-logout {
+    background-color: #7f8c8d;
+}
+
+.btn-login {
+    background-color: #2980b9;
+}
+
 h1, h2 {
     margin-bottom: 20px;
     color: #1a252f;
 }
 
-/* Botones principales */
+/* Menú de botones principales */
 .btn-grid {
     display: flex;
     flex-direction: column;
@@ -47,6 +96,7 @@ h1, h2 {
     border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
+    text-align: center;
     transition: background-color 0.2s;
 }
 
@@ -58,7 +108,7 @@ h1, h2 {
 .btn-sos {
     background-color: #e74c3c;
     font-size: 1.5rem;
-    padding: 25px;
+    padding: 22px;
 }
 
 .btn-sos:hover {
@@ -67,7 +117,7 @@ h1, h2 {
 
 .btn-back {
     background-color: #7f8c8d;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .btn-back:hover {

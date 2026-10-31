@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
+from django.contrib.auth.models import User
+from django.contrib.admin.views.decorators import staff_member_required
 from .forms import RegistroForm
 from .models import GuiaPrimerosAuxilios, ContactoEmergencia, Incidente
 
@@ -55,3 +57,16 @@ def registro(request):
     else:
         form = RegistroForm()
     return render(request, 'registro.html', {'form': form})
+
+# Vistas exclusivas para el Administrador (Gestión de Usuarios)
+@staff_member_required
+def lista_usuarios_admin(request):
+    usuarios = User.objects.all()
+    return render(request, 'admin_usuarios.html', {'usuarios': usuarios})
+
+@staff_member_required
+def eliminar_usuario(request, user_id):
+    usuario = get_object_or_404(User, id=user_id)
+    if usuario != request.user: # Evita que el admin se borre a sí mismo
+        usuario.delete()
+    return redirect('lista_usuarios_admin')

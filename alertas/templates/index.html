@@ -15,7 +15,8 @@
             {% if user.is_authenticated %}
                 <span class="btn-auth btn-user">👤 {{ user.username }}</span>
                 {% if user.is_staff or user.is_superuser %}
-                    <a href="{% url 'admin:index' %}" class="btn-auth btn-admin">⚙️ Admin</a>
+                    <!-- Enlace actualizado a nuestra vista HTML de gestión de usuarios -->
+                    <a href="{% url 'lista_usuarios_admin' %}" class="btn-auth btn-admin">⚙️ Admin</a>
                 {% endif %}
                 <form action="{% url 'logout' %}" method="post" style="display: inline;">
                     {% csrf_token %}

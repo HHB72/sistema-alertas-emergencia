@@ -14,4 +14,12 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('registro/', views.registro, name='registro'),
+
+    # Nuevas rutas para el panel de control de usuarios del Administrador
+    path('admin/usuarios/', views.lista_usuarios_admin, name='lista_usuarios_admin'),
+    path('admin/usuarios/eliminar/<int:user_id>/', views.eliminar_usuario, name='eliminar_usuario'),
+
+    # Panel de control de usuarios personalizado
+    path('panel/usuarios/', views.lista_usuarios_admin, name='lista_usuarios_admin'),
+    path('panel/usuarios/eliminar/<int:user_id>/', views.eliminar_usuario, name='eliminar_usuario'),
 ]

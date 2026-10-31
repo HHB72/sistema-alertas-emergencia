@@ -19,4 +19,3 @@ graph LR
     
     Admin([Administrador]) --> UC1
     Admin --> UC7
-    ```

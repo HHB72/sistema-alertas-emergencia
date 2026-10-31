@@ -13,4 +13,3 @@ graph TD
     subgraph Base de Datos
         MODELS -->|Lectura / Escritura| DB[(db.sqlite3)]
     end
-    ```

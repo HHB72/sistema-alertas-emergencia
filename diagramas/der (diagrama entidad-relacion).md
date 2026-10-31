@@ -1,4 +1,3 @@
-```mermaid
 erDiagram
     USER {
         int id PK
@@ -24,4 +23,3 @@ erDiagram
         text descripcion
         datetime fecha_creacion
     }
-    ```
